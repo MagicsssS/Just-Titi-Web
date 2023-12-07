@@ -1,0 +1,62 @@
+*{
+    margin : 0;
+    padding: 0;
+}
+
+:root{
+    --forest-green-50: #f1fcf1;
+    --forest-green-100: #dff9e1;
+    --forest-green-200: #c0f2c5;
+    --forest-green-300: #8fe699;
+    --forest-green-400: #57d164;
+    --forest-green-500: #30b73f;
+    --forest-green-600: #22962f;
+    --forest-green-700: #1e7728;
+    --forest-green-800: #1d5e25;
+    --forest-green-900: #194e20;
+    --forest-green-950: #092a0f;
+}
+
+
+h1{
+    margin:1em;
+    text-align: center;
+
+}
+
+#s1{
+    color : var(--forest-green-400);
+    -webkit-text-stroke: 0.9px rgb(59, 145, 93);
+    text-shadow:  0px 1px 8px rgb(90, 255, 156) ; 
+    text-decoration: none;
+}
+#s2{
+    color : var(--forest-green-500);
+    -webkit-text-stroke: 0.9px rgb(59, 145, 93);
+    text-shadow:  0px 1px 8px rgb(90, 255, 156) ; 
+    text-decoration: none;
+}
+#s3{
+    color : var(--forest-green-600);
+    -webkit-text-stroke: 0.9px rgb(59, 145, 93);
+    text-shadow:  0px 1px 8px rgb(90, 255, 156) ; 
+    text-decoration: none;
+}
+#s4{
+    color : var(--forest-green-700);
+    -webkit-text-stroke: 0.9px rgb(59, 145, 93);
+    text-shadow:  0px 1px 8px rgb(90, 255, 156) ; 
+    text-decoration: none;
+}
+#s5{
+    color : var(--forest-green-800);
+    -webkit-text-stroke: 0.9px rgb(59, 145, 93);
+    text-shadow:  0px 1px 8px rgb(90, 255, 156) ; 
+    text-decoration: none;
+}
+canvas{
+    margin-left:32%;
+    width : 35%;
+    height : 80vh;
+    border: 1px solid black;
+}
