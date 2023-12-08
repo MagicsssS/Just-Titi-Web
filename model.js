@@ -114,7 +114,25 @@ class Game {
 			this.money += this.round(coef*this.pib)
 
 		}else{
+			this.end_callback(this.end_result())
 		}
+	}
+
+	end_result(){
+		obj = {}
+		obj.win = this.energy > 0.5
+		
+		if (carbon > 0.5){
+			obj.star = 0
+		}else if (carbon > 0.30){
+			obj.star = 1
+		}else if (carbon > 0.15){
+			obj.star = 2
+		}else{
+			obj.star = 3
+		}
+
+		return obj
 	}
 
 	accept(){
