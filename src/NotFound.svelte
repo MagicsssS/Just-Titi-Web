@@ -11,8 +11,8 @@
 <body>
   <h1 class="titre"><span id="s1">404 </span><span id="s2">vous </span><span id="s3">vous </span><span id="s4">êtes</span> <span id="s5">perdu</span> </h1>
   <h1 class="victoire" hidden><span id="s1">Félicitation, </span><span id="s2">vous </span><span id="s3">avez perdu </span><span id="s4">votre</span> <span id="s5">temps</span> </h1>
-  <a href="index.html" hidden><button >Retour à l'accueil</button></a>
-  <a href="index.html"><button >Abandon...</button></a>
+  <a href="./" hidden><button >Retour à l'accueil</button></a>
+  <a href="./"><button >Abandon...</button></a>
   <span id="score"> </span>
   <span id="ligne"> lignes complétés </span>
   <canvas id="tetris">
