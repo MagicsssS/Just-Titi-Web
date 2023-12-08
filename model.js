@@ -115,6 +115,8 @@ class Game {
 
 		}else{
 			this.end_callback(this.end_result())
+			clearInterval(this.mainloop)
+			this.mainloop = null
 		}
 	}
 
