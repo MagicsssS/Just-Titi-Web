@@ -7,6 +7,13 @@
 
     var events = []
     events.push(new Game.Evenement("Bombe Nucléaire", "Salut c'est la bombe", new Game.Effect(-0.01, -0.01), new Game.Effect(0.01, 0.01)))
+    events.push(new Game.Evenement("Campagne de sensibilisation", "Souhaitez vous accepter la campagne de sensibilisation sur la surconsommation d'énergie ? ", new Game.Effect(-0.1, -0.2), new Game.Effect(0.2, 0.2)))
+    events.push(new Game.Evenement("Révolte", "Souhaitez vous empecher la manifestation contre l'augmentation de la pollution", new Game.Effect(0.3, 0.4), new Game.Effect(-0.3, -0.2)))
+    events.push(new Game.Evenement("Instauration d'une loi", "Souhaitez vous voter en faveur de la loi pour lutter contre la pollution", new Game.Effect(-0.3, 0.3), new Game.Effect(0.0, 0.0)))
+    events.push(new Game.Evenement("Ralentissement des transitions", "", new Game.Effect(-0.01, -0.01), new Game.Effect(0.01, 0.01)))
+    events.push(new Game.Evenement("Déforestation contrôléee", "Une entreprise propose un projet de déforestation contrôlée dans une région critique pour le climat.Acceptez vous ?", new Game.Effect(0.2, 0.2), new Game.Effect(-0.2, -0.2)))
+    events.push(new Game.Evenement("Modernisation des transports urbains", "Une entreprise propose l'introduction de véhicules électriques, mais elle nécessite l'expansion des infrastructures de recharge, ce qui pourrait entraîner la démolition de certains espaces verts. Acceptez vous ?", new Game.Effect(0.3, 0.1), new Game.Effect(-0.2, -0.1)))
+    events.push(new Game.Evenement("Développement Ferme éolienne", "Une entreprise propose la construction d'une ferme éolienne en plein cœur de la ville pour promouvoir les énergies renouvelables. Cependant, cela pourrait entraîner des perturbations visuelles et sonores pour les habitants. Acceptez-vous ?", new Game.Effect(0.2, -0.4), new Game.Effect(-0.3, 0.2)))
 
     var upgrades = []
     upgrades.push(new Game.Upgrade("Usine de Traitement de déchets", 0.7, new Game.Effect(0.2, -0.1)))
@@ -22,6 +29,8 @@
 
     let energy = jeu.energy;
     let carbon = jeu.carbon;
+    let money = jeu.money;
+    let date = jeu.date;
 
     jeu.start()
 
@@ -32,15 +41,15 @@
         jeu.pause();
     }
 
-
-
     setInterval( () => {
         energy = jeu.energy;
         carbon = jeu.carbon; 
+        money = jeu.money;
+        date = jeu.date;
     }, interval)
 </script>
 
-<EventModal bind:showModal {...{ rejectButton: "Non", acceptButton: "Oui", acceptFunction: ()=>{jeu.accept()}, rejectFunction: ()=>{jeu.refuse()} }}>
+<EventModal bind:showModal {...{ rejectButton: "Non", acceptButton: "Oui", acceptFunction: ()=>{jeu.accept(); jeu.resume();}, rejectFunction: ()=>{jeu.refuse(); jeu.resume();} }}>
     <h2 slot="header" id="title"></h2>
 
     <div class="w-96 min-w-full">
@@ -62,38 +71,44 @@
         class="w-8/12 h-screen bg-[url('/fond-jeu.jpg')]"
         style="filter: saturate({1 - carbon})"
     ></div>
-    <div class="w-2/12 h-screen flex flex-row justify-around bg-gray-200">
-        <div class="flex flex-col">
-            <p class="text-2xl text-center">Energie</p>
-            <div
-                class="flex flex-col flex-nowrap justify-end w-5 h-72 bg-gray-200 rounded-full overflow-hidden dark:bg-gray-700"
-                role="progressbar"
-                aria-valuemin="0"
-                aria-valuemax="100"
-            >
+    <div class="w-2/12 h-screen flex flex-col bg-gray-200 justify-between">
+        <div class="h-5/12 flex flex-row justify-around">
+            <div class="flex flex-col">
+                <p class="text-2xl text-center">Energie</p>
                 <div
-                    class="rounded-full overflow-hidden bg-blue-600 bg-blue-500"
-                    style="height: {energy * 100}%"
+                    class="flex flex-col flex-nowrap justify-end w-5 h-72 bg-gray-200 rounded-full overflow-hidden dark:bg-gray-700"
+                    role="progressbar"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
                 >
-                    <progress id="energy" />
+                    <div
+                        class="rounded-full overflow-hidden bg-blue-600 bg-blue-500"
+                        style="height: {energy * 100}%"
+                    >
+                        <progress id="energy" />
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-col">
+                <p class="text-2xl text-center">Carbone</p>
+                <div
+                    class="flex flex-col flex-nowrap justify-end w-5 h-72 bg-gray-200 rounded-full overflow-hidden dark:bg-gray-700"
+                    role="progressbar"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                >
+                    <div
+                        class="rounded-full overflow-hidden bg-blue-600 bg-blue-500"
+                        style="height: {carbon * 100}%"
+                    >
+                        <progress id="carbon" />
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="flex flex-col">
-            <p class="text-2xl text-center">Carbone</p>
-            <div
-                class="flex flex-col flex-nowrap justify-end w-5 h-72 bg-gray-200 rounded-full overflow-hidden dark:bg-gray-700"
-                role="progressbar"
-                aria-valuemin="0"
-                aria-valuemax="100"
-            >
-                <div
-                    class="rounded-full overflow-hidden bg-blue-600 bg-blue-500"
-                    style="height: {carbon * 100}%"
-                >
-                    <progress id="carbon" />
-                </div>
-            </div>
+        <div class="h-7/12 flex flex-col text-center bg-gray-200 mb-5">
+            <p class = "text-2xl text-center mt-10">Money: {money} $</p>
+            <p class = "text-2xl text-center mb-5">Time: {date}</p>
         </div>
     </div>
 </div>
