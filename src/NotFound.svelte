@@ -6,13 +6,9 @@
     let score = 404;
     let ligne = 0;
 
+    let victoire = false;
+
     onMount(() => {
-        const titre = document.querySelector(".titre");
-
-        //const score = document.getElementById("score")// document.querySelector("#score");
-        // const ligne = document.querySelector("#ligne");
-
-        // const canvas = document.querySelector("#tetris");
         const context = canvas.getContext("2d");
 
         const ROWS = 10;
@@ -23,9 +19,6 @@
         const board = Array.from({ length: ROWS }, () =>
             Array(COLUMNS).fill(0),
         );
-
-        // Vers le bas par défaut
-        var rotation = 0;
 
         let currentPiece = {
             shape: [],
@@ -88,7 +81,6 @@
                                 currentPiece.col + j
                             ] !== 0)
                     ) {
-                        //collision
                         if (
                             currentPiece.col != -1 &&
                             currentPiece.col + currentPiece.shape[0].length !=
@@ -131,7 +123,7 @@
 
                     // Ajouter une nouvelle ligne vide en haut
                     board.unshift(Array(COLUMNS).fill(0));
-                    ligne = score + 1;
+                    ligne = ligne + 1;
                 }
             }
         }
@@ -205,14 +197,8 @@
                     Math.floor(randomPiece.shape[0].length / 2),
             };
             if (score == 0) {
-                let titre = document.querySelector(".titre");
-                titre.remove();
-                new_titre = document.querySelector(".victoire").hidden = false;
-                // let canva = document.querySelector("canvas");
+                victoire = true;
                 canvas.remove();
-                let span = document.querySelector("#score");
-                span.remove();
-                lien = document.querySelector("a").hidden = false;
             } else if (!isValidMove() && score != 0) {
                 // Fin de jeu (collision au début)
                 score = parseInt(score) + 16;
@@ -332,7 +318,6 @@
         });
 
         function draw() {
-            // let canvas; //document.querySelector("canvas");
             if (canvas != null) {
                 context.clearRect(0, 0, canvas.width, canvas.height);
                 drawBoard();
@@ -355,20 +340,24 @@
 </script>
 
 <div id="fake-body">
-    <h1 class="titre">
-        <span id="s1">404 </span><span id="s2">vous </span><span id="s3"
-            >vous
-        </span><span id="s4">êtes</span> <span id="s5">perdu</span>
-    </h1>
-    <h1 class="victoire" hidden>
-        <span id="s1">Félicitation, </span><span id="s2">vous </span><span
-            id="s3"
-            >avez perdu
-        </span><span id="s4">votre</span> <span id="s5">temps</span>
-    </h1>
-    <a href="./" hidden><button>Retour à l'accueil</button></a>
+    {#if victoire == false}
+        <h1 class="titre">
+            <span id="s1">404 </span><span id="s2">vous </span><span id="s3"
+                >vous
+            </span><span id="s4">êtes</span> <span id="s5">perdu</span>
+        </h1>
+
+        <span id="score">{score}</span><span id="ligne">{ligne}</span>
+    {:else}
+        <h1 class="victoire">
+            <span id="s1">Félicitation, </span><span id="s2">vous </span><span
+                id="s3"
+                >avez perdu
+            </span><span id="s4">votre</span> <span id="s5">temps</span>
+        </h1>
+        <a href="./"><button>Retour à l'accueil</button></a>
+    {/if}
     <a href="./"><button>Abandon...</button></a>
-    <span id="score">{score}</span>
     <canvas bind:this={canvas} id="tetris"> </canvas>
 </div>
 
