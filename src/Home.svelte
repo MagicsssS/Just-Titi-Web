@@ -20,16 +20,16 @@
     events.push(new Game.Evenement("Éruption Volcanique Imminente", "Des signes précurseurs indiquent une possible éruption volcanique dans votre région. Une entreprise propose la mise en place d'un réseau de dérivation de la lave pour protéger les zones habitées, mais cela pourrait avoir des répercussions graves sur les habitats naturels et les ressources géothermiques. Acceptez-vous ?", new Game.Effect(-0.1, -0.2), new Game.Effect(0.1, -0.2)))
 
     var upgrades = []
-    upgrades.push(new Game.Upgrade("Usine de Traitement de déchets", 7, new Game.Effect(0.2, -0.1)))
-    upgrades.push(new Game.Upgrade("Agriculture bio", 6, new Game.Effect(0.2, -0.1)))
+    upgrades.push(new Game.Upgrade("Usine de Traitement de déchets", 7, new Game.Effect(-0.2, -0.25)))
+    upgrades.push(new Game.Upgrade("Agriculture bio", 6, new Game.Effect(-0.4, -0.25)))
 
-    upgrades.push(new Game.Upgrade("Désinstallation Climatisation", 3, new Game.Effect(0.1, -0.2)))
-    upgrades.push(new Game.Upgrade("Centrale Nucléaire", 8, new Game.Effect(0.6, -0.3)))
-    upgrades.push(new Game.Upgrade("Barrage", 4, new Game.Effect(0.4, -0.5)))
-    upgrades.push(new Game.Upgrade("Eolienne", 5, new Game.Effect(0.3, -0.7)))
-    upgrades.push(new Game.Upgrade("Bioénergie", 3, new Game.Effect(0.3, -0.7)))
+    upgrades.push(new Game.Upgrade("Désinstallation Climatisation", 5, new Game.Effect(0.05, -0.2)))
+    upgrades.push(new Game.Upgrade("Centrale Nucléaire", 15, new Game.Effect(0.3, 0.0)))
+    upgrades.push(new Game.Upgrade("Barrage", 4, new Game.Effect(0.2, 0.0)))
+    upgrades.push(new Game.Upgrade("Eolienne", 5, new Game.Effect(0.1, 0.0)))
+    upgrades.push(new Game.Upgrade("Bioénergie", 2, new Game.Effect(0.1, 0.1)))
 
-    var jeu = new Game(1000, 1, upgrades, events, new Game.Effect(0.5, 1), showEvent, onEnd, interval)
+    var jeu = new Game(1000, 1, upgrades, events, new Game.Effect(0.6, 1), showEvent, onEnd, interval)
 
     let energy = jeu.energy;
     let carbon = jeu.carbon;
