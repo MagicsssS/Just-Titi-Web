@@ -57,7 +57,7 @@ class Game {
 	}
 
 	buy(upgrade){
-		if (this.money > upgrade.cost * this.pib){
+		if (this.money >= upgrade.cost * this.pib){
 			this.current_upgrades.push(upgrade)
 			this.money -= upgrade.cost * this.pib
 			return true
@@ -181,8 +181,5 @@ class Game {
 		return month + " " + year
 	}
 }
-
-
-
 
 export default Game;
