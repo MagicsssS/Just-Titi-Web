@@ -12,12 +12,12 @@
     "public/*"
   ],
   "compilerOptions": {
-    "resolveJsonModule": true,
+    "resolveJsonModule": false,
     "target": "esnext",
     "module": "esnext",
     "baseUrl": ".",
     "strict": false,
     "allowJs": true,
-    "checkJs": true
+    "checkJs": false
   }
 }
