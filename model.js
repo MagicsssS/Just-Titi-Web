@@ -19,12 +19,11 @@ class Game {
 		this.event_callback = event_callback // Function
 		this.end_callback = end_callback // Function
 
+		this.mainloop = null
+
 		this.interval = interval
 	}
 
-	endgame_result(){
-
-	}
 
 	buy(upgrade){
 		if (this.money > upgrade.cost * this.pib){
@@ -41,7 +40,15 @@ class Game {
 	}
 
 	start(){
-		setInterval( () => {this.loop()}, interval)
+		this.mainloop = setInterval( () => {this.loop()}, interval)
+	}
+
+	pause(){
+		clearInterval(this.mainloop)
+	}
+
+	resume(){
+		this.start()
 	}
 
 	get_random_event(){
