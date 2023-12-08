@@ -52,9 +52,12 @@ class Game {
 		this.interval = interval
 	}
 
+	can_buy(upgrade){
+		return this.money >= upgrade.cost * this.pib
+	}
 
 	buy(upgrade){
-		if (this.money > upgrade.cost * this.pib){
+		if (this.money >= upgrade.cost * this.pib){
 			this.upgrades.push(upgrade)
 			this.money -= upgrade.cost * this.pib
 			return true
@@ -121,11 +124,11 @@ class Game {
 		var obj = {}
 		obj.win = this.energy > 0.5
 		
-		if (carbon > 0.5){
+		if (this.carbon > 0.5){
 			obj.star = 0
-		}else if (carbon > 0.30){
+		}else if (this.carbon > 0.30){
 			obj.star = 1
-		}else if (carbon > 0.15){
+		}else if (this.carbon > 0.15){
 			obj.star = 2
 		}else{
 			obj.star = 3
