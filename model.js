@@ -6,7 +6,7 @@ class Upgrade {
 	}
 }
 
-class Event {
+class Evenement {
 	constructor(name, description, yes_effect, no_effect){
 		this.name = name
 		this.description = description
@@ -25,7 +25,7 @@ class Effect {
 class Game {
 	static Effect = Effect
 	static Upgrade = Upgrade
-	static Event = Event
+	static Evenement = Evenement
 
 	constructor(pib, money, upgrades, events, init_effect, event_callback, end_callback, interval){
 		this.pib = pib

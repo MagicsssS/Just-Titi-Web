@@ -7,6 +7,18 @@
 
     export let acceptButton;
     export let rejectButton;
+    export let acceptFunction;
+    export let rejectFunction;
+
+    function accept() {
+        dialog.close(); 
+        acceptFunction();
+    }
+
+    function refuse() {
+        dialog.close(); 
+        rejectFunction();
+    }
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events a11y-no-noninteractive-element-interactions -->
@@ -23,8 +35,8 @@
         <hr />
         <div class="flex flex-row float-right space-x-4">
             <!-- svelte-ignore a11y-autofocus -->
-            <button on:click={() => dialog.close()}>{rejectButton}</button>
-            <button on:click={() => dialog.close()}>{acceptButton}</button>
+            <button on:click={() => accept()}>{acceptButton}</button>
+            <button on:click={() => refuse()}>{rejectButton}</button>
         </div>
     </div>
 </dialog>

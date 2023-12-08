@@ -3,51 +3,48 @@
     import Game from '../model.js';
 
     let showModal = false;
+    let interval = 60;
 
     var events = []
-    events.push(new Game.Event("Bombe Nucléaire", "", new Game.Effect(-0.01, -0.01), new Game.Effect(0.01, 0.01)))
-
+    events.push(new Game.Evenement("Bombe Nucléaire", "Salut c'est la bombe", new Game.Effect(-0.01, -0.01), new Game.Effect(0.01, 0.01)))
 
     var upgrades = []
     upgrades.push(new Game.Upgrade("Usine de Traitement de déchets", 0.7, new Game.Effect(0.2, -0.1)))
     upgrades.push(new Game.Upgrade("Agriculture bio", 0.6, new Game.Effect(0.2, -0.1)))
 
+    upgrades.push(new Game.Upgrade("Désinstallation Climatisation", 0.3, new Game.Effect(0.1, -0.2)))
+    upgrades.push(new Game.Upgrade("Centrale Nucléaire", 0.8, new Game.Effect(0.6, -0.3)))
+    upgrades.push(new Game.Upgrade("Barrage", 0.4, new Game.Effect(0.4, -0.5)))
+    upgrades.push(new Game.Upgrade("Eolienne", 0.5, new Game.Effect(0.3, -0.7)))
+    upgrades.push(new Game.Upgrade("Bioénergie", 0.3, new Game.Effect(0.3, -0.7)))
 
-    /*upgrades.push(new Upgrade("Désinstallation Climatisation", 0.3, new Effect(0.1, -0.2)))
-    upgrades.push(new Upgrade("Centrale Nucléaire", 0.8, new Effect(0.6, -0.3)))
-    upgrades.push(new Upgrade("Barrage", 0.4, new Effect(0.4, -0.5)))
-    upgrades.push(new Upgrade("Eolienne", 0.5, new Effect(0.3, -0.7)))
-    upgrades.push(new Upgrade("Bioénergie", 0.3, new Effect(0.3, -0.7)))*/
-
-
-    var jeu = new Game(100, 1, upgrades, events, new Game.Effect(0.5, 1), showEvent, () => {}, 1000)
-
+    var jeu = new Game(100, 1, upgrades, events, new Game.Effect(0.5, 1), showEvent, () => {}, interval)
 
     let energy = jeu.energy;
     let carbon = jeu.carbon;
 
     jeu.start()
 
-
-    function showEvent() {
+    function showEvent(event) {
+        document.getElementById("title").innerHTML = event.name
+        document.getElementById("text").innerHTML = event.description
         showModal = true;
         jeu.pause();
     }
+
+
+
+    setInterval( () => {
+        energy = jeu.energy;
+        carbon = jeu.carbon; 
+    }, interval)
 </script>
 
-<button
-    on:click={() => {
-        showEvent();
-    }}
->
-    Show modal
-</button>
-
-<EventModal bind:showModal {...{ rejectButton: "Non", acceptButton: "Oui" }}>
-    <h2 slot="header">Titre</h2>
+<EventModal bind:showModal {...{ rejectButton: "Non", acceptButton: "Oui", acceptFunction: ()=>{jeu.accept()}, rejectFunction: ()=>{jeu.refuse()} }}>
+    <h2 slot="header" id="title"></h2>
 
     <div class="w-96 min-w-full">
-        <p>Text</p>
+        <p id="text"></p>
     </div>
 </EventModal>
 
