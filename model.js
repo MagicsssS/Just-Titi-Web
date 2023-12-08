@@ -194,3 +194,5 @@ jeu.start()
 setInterval( () => {
 	console.log(`${jeu.date} : ${jeu.money} / ${jeu.energy} énergie / ${jeu.carbon} CO² émis`)
 }, interval)
+
+export default Game
