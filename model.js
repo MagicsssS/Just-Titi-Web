@@ -37,7 +37,7 @@ class Game {
 
 		this.events = events // Events[]
 
-		this.event_delay = 60
+		this.event_delay = 25
 		this.event_counter = this.event_delay
 
 		this.effects = [init_effect]
@@ -95,7 +95,7 @@ class Game {
 	}
 
 	loop(){
-		if (this.timer > 0){
+		if (this.timer > 0 || this.money < -(2.5*this.pib)){
 			this.timer -= 1
 
 			this.event_counter -= 1
@@ -122,7 +122,7 @@ class Game {
 
 	end_result(){
 		var obj = {}
-		obj.win = this.energy > 0.5
+		obj.win = this.energy > 0.5 && this.money > -(2.5*this.pib)
 		
 		if (this.carbon > 0.5){
 			obj.star = 0
