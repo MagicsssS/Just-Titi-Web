@@ -52,6 +52,9 @@ class Game {
 		this.interval = interval
 	}
 
+	can_buy(upgrade){
+		return this.money > upgrade.cost * this.pib
+	}
 
 	buy(upgrade){
 		if (this.money > upgrade.cost * this.pib){
