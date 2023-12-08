@@ -1,9 +1,12 @@
 class Game {
-	constructor(pib, money, upgrades, events, init_effect, event_callback, end_callback){
+	constructor(pib, money, upgrades, events, init_effect, event_callback, end_callback, interval){
 		this.pib = pib
 		this.money = pib*money // FLOAT
 		this.timer = 324 // INT
 		this.upgrades = upgrades // Upgrades[]
+
+		this.current_upgrades = []
+
 		this.events = events // Events[]
 
 		this.event_delay = 60
@@ -15,14 +18,30 @@ class Game {
 
 		this.event_callback = event_callback // Function
 		this.end_callback = end_callback // Function
+
+		this.interval = interval
 	}
 
 	endgame_result(){
 
 	}
 
+	buy(upgrade){
+		if (this.money > upgrade.cost * this.pib){
+			this.upgrades.push(upgrade)
+			this.money -= upgrade.cost * this.pib
+			return true
+		}else{
+			return false
+		}
+	}
+
+	round(nb, after_comma){
+		return Number(nb.toFixed(after_comma))
+	}
+
 	start(){
-		setInterval( () => {this.loop()}, 20)
+		setInterval( () => {this.loop()}, interval)
 	}
 
 	get_random_event(){
@@ -54,12 +73,11 @@ class Game {
 			}
 
 			var coef = (this.energy*2)-1
-			this.money += Math.round(coef*this.pib)
+			this.money += this.round(coef*this.pib)
 
 		}else{
 			this.end_callback(this.endgame_result())
 		}
-		//event_callback
 	}
 
 	accept(){
@@ -79,10 +97,10 @@ class Game {
 	get energy(){
 		var res = 0
 		for (var upgrade of this.upgrades){
-			res += upgrade.effect.energy
+			res += this.round(upgrade.effect.energy, 2)
 		}
 		for (var effect of this.effects){
-			res += effect.energy
+			res += this.round(effect.energy, 2)
 		}
 		return res
 	}
@@ -90,10 +108,10 @@ class Game {
 	get carbon(){
 		var res = 0
 		for (var upgrade of this.upgrades){
-			res += upgrade.effect.carbon
+			res += this.round(upgrade.effect.carbon, 2)
 		}
 		for (var effect of this.effects){
-			res += effect.carbon
+			res += this.round(effect.carbon, 2)
 		}
 		return res
 	}
@@ -107,11 +125,10 @@ class Game {
 }
 
 class Upgrade {
-	constructor(name, cost, effect, event=null){
+	constructor(name, cost, effect){
 		this.name = name
 		this.cost = cost
 		this.effect = effect
-		this.event = event
 	}
 }
 
@@ -121,14 +138,6 @@ class Event {
 		this.description = description
 		this.yes_effect = yes_effect
 		this.no_effect = no_effect
-	}
-
-	accept(){
-		return this.yes_effect
-	}
-
-	refuse(){
-		return this.no_effect
 	}
 }
 
@@ -150,13 +159,26 @@ function event_callback(event){
 	}
 }
 
+/*
 var events = []
 events.push(new Event("Bombe Nucléaire", "", new Effect(-0.01, -0.01), new Effect(0.01, 0.01)))
 
-var jeu = new Game(100, 1, [], events, new Effect(0.4, 0.5), event_callback, () => {})
+
+var upgrades = []
+upgrades.push(new Upgrade("Agriculture bio", 0.6, new Effect(0.2, -0.1)))
+
+upgrades.push(new Upgrade("Usine de Traitement de déchets", 0.7, new Effect(0.2, -0.1)))
+upgrades.push(new Upgrade("Désinstallation Climatisation", 0.3, new Effect(0.1, -0.2)))
+upgrades.push(new Upgrade("Centrale Nucléaire", 0.8, new Effect(0.6, -0.3)))
+upgrades.push(new Upgrade("Barrage", 0.4, new Effect(0.4, -0.5)))
+upgrades.push(new Upgrade("Eolienne", 0.5, new Effect(0.3, -0.7)))
+upgrades.push(new Upgrade("Bioénergie", 0.3, new Effect(0.3, -0.7)))
+
+var jeu = new Game(100, 1, [], events, new Effect(0.5, 0.5), event_callback, () => {}, interval)
 
 jeu.start()
 
 setInterval( () => {
 	console.log(`${jeu.date} : ${jeu.money} / ${jeu.energy} énergie / ${jeu.carbon} CO² émis`)
-}, 1500)
+}, interval)
+*/
