@@ -1,4 +1,32 @@
+class Upgrade {
+	constructor(name, cost, effect){
+		this.name = name
+		this.cost = cost
+		this.effect = effect
+	}
+}
+
+class Event {
+	constructor(name, description, yes_effect, no_effect){
+		this.name = name
+		this.description = description
+		this.yes_effect = yes_effect
+		this.no_effect = no_effect
+	}
+}
+
+class Effect {
+	constructor(energy, carbon){
+		this.energy = energy
+		this.carbon = carbon
+	}
+}
+
 class Game {
+	static Effect = Effect
+	static Upgrade = Upgrade
+	static Event = Event
+
 	constructor(pib, money, upgrades, events, init_effect, event_callback, end_callback, interval){
 		this.pib = pib
 		this.money = pib*money // FLOAT
@@ -130,30 +158,6 @@ class Game {
 	}
 }
 
-class Upgrade {
-	constructor(name, cost, effect){
-		this.name = name
-		this.cost = cost
-		this.effect = effect
-	}
-}
-
-class Event {
-	constructor(name, description, yes_effect, no_effect){
-		this.name = name
-		this.description = description
-		this.yes_effect = yes_effect
-		this.no_effect = no_effect
-	}
-}
-
-class Effect {
-	constructor(energy, carbon){
-		this.energy = energy
-		this.carbon = carbon
-	}
-}
-
 
 function event_callback(event){
 	console.log(`EVENT : ${event.name} : YES / NO ?`)
@@ -180,6 +184,8 @@ upgrades.push(new Upgrade("Centrale Nucléaire", 0.8, new Effect(0.6, -0.3)))
 upgrades.push(new Upgrade("Barrage", 0.4, new Effect(0.4, -0.5)))
 upgrades.push(new Upgrade("Eolienne", 0.5, new Effect(0.3, -0.7)))
 upgrades.push(new Upgrade("Bioénergie", 0.3, new Effect(0.3, -0.7)))
+
+var interval = 20
 
 var jeu = new Game(100, 1, [], events, new Effect(0.5, 0.5), event_callback, () => {}, interval)
 
