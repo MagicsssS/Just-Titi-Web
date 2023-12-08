@@ -1,6 +1,5 @@
 <script>
     import { onMount } from "svelte";
-    import { writable } from "svelte/store";
 
     let canvas;
     let score = 404;
@@ -337,6 +336,21 @@
 
         gameLoop();
     });
+
+    function envoyerEmail() {
+        var corpsEmail =
+            "EH! Tu devineras jamais! J'ai réussi le tétris du groupe Just TiTi de la nuit de l'info";
+
+        var lienMailto =
+            "mailto:destinataire@example.com?body=" +
+            encodeURIComponent(corpsEmail);
+
+        window.location.href = lienMailto;
+    }
+
+    function setEasyMode() {
+        score = 24;
+    }
 </script>
 
 <div id="fake-body">
@@ -348,6 +362,11 @@
         </h1>
 
         <span id="score">{score}</span><span id="ligne">{ligne}</span>
+        <button
+            on:click={() => {
+                setEasyMode();
+            }}>Mode facile</button
+        >
     {:else}
         <h1 class="victoire">
             <span id="s1">Félicitation, </span><span id="s2">vous </span><span
@@ -356,6 +375,13 @@
             </span><span id="s4">votre</span> <span id="s5">temps</span>
         </h1>
         <a href="./"><button>Retour à l'accueil</button></a>
+        <a href="./"
+            ><button
+                on:click={() => {
+                    envoyerEmail();
+                }}>Partager mon succès</button
+            ></a
+        >
     {/if}
     <a href="./"><button>Abandon...</button></a>
     <canvas bind:this={canvas} id="tetris"> </canvas>
