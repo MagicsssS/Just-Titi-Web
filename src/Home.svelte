@@ -6,11 +6,9 @@
     let interval = 1000;
 
     var events = []
-    events.push(new Game.Evenement("Bombe Nucléaire", "Salut c'est la bombe", new Game.Effect(-0.01, -0.01), new Game.Effect(0.01, 0.01)))
     events.push(new Game.Evenement("Campagne de sensibilisation", "Souhaitez vous accepter la campagne de sensibilisation sur la surconsommation d'énergie ? ", new Game.Effect(-0.01, -0.2), new Game.Effect(0.02, 0.2)))
     events.push(new Game.Evenement("Révolte", "Souhaitez vous empecher la manifestation contre l'augmentation de la pollution", new Game.Effect(0.3, 0.4), new Game.Effect(-0.03, -0.2)))
     events.push(new Game.Evenement("Instauration d'une loi", "Souhaitez vous voter en faveur de la loi pour lutter contre la pollution", new Game.Effect(-0.03, 0.3), new Game.Effect(0.0, 0.0)))
-    events.push(new Game.Evenement("Ralentissement des transitions", "", new Game.Effect(-0.01, -0.01), new Game.Effect(0.01, 0.01)))
     events.push(new Game.Evenement("Déforestation contrôléee", "Une entreprise propose un projet de déforestation contrôlée dans une région critique pour le climat.Acceptez vous ?", new Game.Effect(0.02, 0.2), new Game.Effect(-0.02, -0.2)))
     events.push(new Game.Evenement("Modernisation des transports urbains", "Une entreprise propose l'introduction de véhicules électriques, mais elle nécessite l'expansion des infrastructures de recharge, ce qui pourrait entraîner la démolition de certains espaces verts. Acceptez vous ?", new Game.Effect(0.03, 0.1), new Game.Effect(-0.02, -0.1)))
     events.push(new Game.Evenement("Développement Ferme éolienne", "Une entreprise propose la construction d'une ferme éolienne en plein cœur de la ville pour promouvoir les énergies renouvelables. Cependant, cela pourrait entraîner des perturbations visuelles et sonores pour les habitants. Acceptez-vous ?", new Game.Effect(0.02, -0.4), new Game.Effect(-0.03, 0.2)))
