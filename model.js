@@ -118,7 +118,7 @@ class Game {
 	}
 
 	end_result(){
-		obj = {}
+		var obj = {}
 		obj.win = this.energy > 0.5
 		
 		if (carbon > 0.5){
