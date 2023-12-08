@@ -83,7 +83,6 @@ class Game {
 			this.money += this.round(coef*this.pib)
 
 		}else{
-			this.end_callback(this.endgame_result())
 		}
 	}
 
