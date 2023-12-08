@@ -28,6 +28,7 @@
     upgrades.push(new Game.Upgrade("Bioénergie", 2, new Game.Effect(0.1, 0.1)))
 
     var jeu = new Game(1000, 1, upgrades, events, new Game.Effect(0.6, 1), showEvent, onEnd, interval)
+    
 
     let energy = jeu.energy;
     let carbon = jeu.carbon;
@@ -54,7 +55,21 @@
         document.getElementById("accept_modal_button").style.display = "None"
         document.getElementById("refuse_modal_button").style.display = "None"
         showModal = true;
+    }
 
+    function buyAgri() {
+        jeu.buy(upgrades[1]);
+        document.querySelector("#agri").style.display = "block"
+    }
+
+    function buyNuc() {
+        jeu.buy(upgrades[3])
+        document.querySelector("#nuc").style.display = "block"
+    }
+
+    function buyEolienne() {
+        jeu.buy(upgrades[5]);
+        document.getElementById("eolienne").style.display = "block"
     }
 
     setInterval( () => {
@@ -62,7 +77,6 @@
         carbon = jeu.carbon; 
         money = jeu.money;
         date = jeu.date;
-        //{jeu.can_buy(upgrades[0])? 0 : 1}
     }, interval)
 </script>
 
@@ -81,7 +95,7 @@
             <p class="mt-3 ml-2">Prix :<br/> {upgrades[0].cost * jeu.pib}$</p>
         </div>
         <div class="flex flex-row space-between">
-            <div class="w-1/2 bg-white box-border h-18 w-18" on:click|preventDefault|stopPropagation|capture|nonpassive={() => jeu.buy(upgrades[1])}><img src="bio-logo.jpg" alt="Bio"/></div>
+            <div class="w-1/2 bg-white box-border h-18 w-18" on:click|preventDefault|stopPropagation|capture|nonpassive={() => buyAgri()}><img src="bio-logo.jpg" alt="Bio"/></div>
             <p class="mt-3 ml-2">Prix :<br/> {upgrades[1].cost * jeu.pib}$</p>
         </div>
         <div class="flex flex-row space-between">
@@ -89,7 +103,7 @@
             <p class="mt-3 ml-2">Prix :<br/> {upgrades[2].cost * jeu.pib}$</p>
         </div>
         <div class="flex flex-row space-between">
-            <div class="w-1/2 bg-white box-border h-18 w-18" on:click|preventDefault|stopPropagation|capture|nonpassive={() => jeu.buy(upgrades[3])}><img src="centrale-nucleaire.png" alt="Usine à charbon"/></div>
+            <div class="w-1/2 bg-white box-border h-18 w-18" on:click|preventDefault|stopPropagation|capture|nonpassive={() => buyNuc()}><img src="centrale-nucleaire.png" alt="Usine à charbon"/></div>
             <p class="mt-3 ml-2">Prix :<br/> {upgrades[3].cost * jeu.pib}$</p>
         </div>
         <div class="flex flex-row space-between">
@@ -97,7 +111,7 @@
             <p class="mt-3 ml-2">Prix :<br/> {upgrades[4].cost * jeu.pib}$</p>
         </div>
         <div class="flex flex-row space-between">
-            <div class="w-1/2 bg-white box-border h-18 w-18" on:click|preventDefault|stopPropagation|capture|nonpassive={() => jeu.buy(upgrades[5])}><img src="eolienne logo.avif" alt="Eolienne"/></div>
+            <div class="w-1/2 bg-white box-border h-18 w-18" on:click|preventDefault|stopPropagation|capture|nonpassive={() => buyEolienne()}><img src="eolienne logo.avif" alt="Eolienne"/></div>
             <p class="mt-3 ml-2">Prix :<br/> {upgrades[5].cost * jeu.pib}$</p>
         </div>
         <div class="flex flex-row space-between">
@@ -108,7 +122,11 @@
     <div
         class="w-8/12 h-screen bg-[url('/fond-jeu.jpg')]"
         style="filter: saturate({Math.min(1 - carbon, 2)})"
-    ></div>
+    >
+    <img id="agri" src="/imaj/agri-bio.png" class="h-1/4 absolute" style="display: none">
+    <img id="nuc" src="/imaj/nuc.png" class="h-1/2 ml-20 mt-80  absolute" style="display: none">
+    <img id="eolienne" src="/imaj/eolienne.png" class="h-1/4 ml-96 mt-72 absolute" style="display: none">
+    </div>
     <div class="w-2/12 h-screen flex flex-col bg-gray-200 justify-between">
         <div class="h-5/12 flex flex-row justify-around">
             <div class="flex flex-col">
