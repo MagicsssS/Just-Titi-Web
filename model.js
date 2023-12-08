@@ -159,15 +159,16 @@ function event_callback(event){
 	}
 }
 
-/*
+
 var events = []
 events.push(new Event("Bombe Nucléaire", "", new Effect(-0.01, -0.01), new Effect(0.01, 0.01)))
 
 
 var upgrades = []
+upgrades.push(new Upgrade("Usine de Traitement de déchets", 0.7, new Effect(0.2, -0.1)))
 upgrades.push(new Upgrade("Agriculture bio", 0.6, new Effect(0.2, -0.1)))
 
-upgrades.push(new Upgrade("Usine de Traitement de déchets", 0.7, new Effect(0.2, -0.1)))
+
 upgrades.push(new Upgrade("Désinstallation Climatisation", 0.3, new Effect(0.1, -0.2)))
 upgrades.push(new Upgrade("Centrale Nucléaire", 0.8, new Effect(0.6, -0.3)))
 upgrades.push(new Upgrade("Barrage", 0.4, new Effect(0.4, -0.5)))
@@ -181,4 +182,3 @@ jeu.start()
 setInterval( () => {
 	console.log(`${jeu.date} : ${jeu.money} / ${jeu.energy} énergie / ${jeu.carbon} CO² émis`)
 }, interval)
-*/
