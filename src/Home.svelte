@@ -46,14 +46,15 @@
     }
 
     function onEnd(obj){
-        console.log("wtf")
         if (obj.win){
             document.getElementById("title").innerHTML = "Bien joué ! Vous avez gagné !"
-            document.getElementById("text").innerHTML = "Votre score : " + obj.star + " étoiles !"
+            document.getElementById("text").innerHTML = "Votre score carbone : " + obj.star + " étoiles !"
         }else{
-            document.getElementById("title").innerHTML = "Naze"
-            document.getElementById("text").innerHTML = "Votre score de naze : " + obj.star + " étoiles de naze !"
+            document.getElementById("title").innerHTML = "Vous avez perdu, vous êtes en déficit..."
+            document.getElementById("text").innerHTML = "Votre score carbone : " + obj.star + " étoiles !"
         }
+        document.getElementById("accept_modal_button").style.display = "None"
+        document.getElementById("refuse_modal_button").style.display = "None"
         showModal = true;
 
     }

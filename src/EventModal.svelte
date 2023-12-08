@@ -35,8 +35,8 @@
         <hr />
         <div class="flex flex-row float-right space-x-4">
             <!-- svelte-ignore a11y-autofocus -->
-            <button on:click={() => accept()}>{acceptButton}</button>
-            <button on:click={() => refuse()}>{rejectButton}</button>
+            <button id="accept_modal_button" on:click={() => accept()}>{acceptButton}</button>
+            <button id="refuse_modal_button" on:click={() => refuse()}>{rejectButton}</button>
         </div>
     </div>
 </dialog>
