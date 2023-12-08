@@ -55,7 +55,7 @@ class Game {
 
 	buy(upgrade){
 		if (this.money > upgrade.cost * this.pib){
-			this.upgrades.push(upgrade)
+			this.current_upgrades.push(upgrade)
 			this.money -= upgrade.cost * this.pib
 			return true
 		}else{
