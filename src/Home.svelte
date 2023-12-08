@@ -3,7 +3,7 @@
     import Game from '../model.js';
 
     let showModal = false;
-    let interval = 60;
+    let interval = 1;
 
     var events = []
     events.push(new Game.Evenement("Bombe Nucléaire", "Salut c'est la bombe", new Game.Effect(-0.01, -0.01), new Game.Effect(0.01, 0.01)))
@@ -25,7 +25,7 @@
     upgrades.push(new Game.Upgrade("Eolienne", 0.5, new Game.Effect(0.3, -0.7)))
     upgrades.push(new Game.Upgrade("Bioénergie", 0.3, new Game.Effect(0.3, -0.7)))
 
-    var jeu = new Game(100, 1, upgrades, events, new Game.Effect(0.5, 1), showEvent, () => {}, interval)
+    var jeu = new Game(100, 1, upgrades, events, new Game.Effect(0.5, 1), showEvent, onEnd, interval)
 
     let energy = jeu.energy;
     let carbon = jeu.carbon;
@@ -39,6 +39,19 @@
         document.getElementById("text").innerHTML = event.description
         showModal = true;
         jeu.pause();
+    }
+
+    function onEnd(obj){
+        console.log("wtf")
+        if (obj.win){
+            document.getElementById("title").innerHTML = "Bien joué ! Vous avez gagné !"
+            document.getElementById("text").innerHTML = "Votre score : " + obj.star + " étoiles !"
+        }else{
+            document.getElementById("title").innerHTML = "Naze"
+            document.getElementById("text").innerHTML = "Votre score de naze : " + obj.star + " étoiles de naze !"
+        }
+        showModal = true;
+
     }
 
     setInterval( () => {
